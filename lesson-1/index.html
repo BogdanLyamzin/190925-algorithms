@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //    let username = prompt("Enter your username");
+      //    while(!username || username.trim() === "") {
+      //     username = prompt("Enter your username");
+      //    }
+      //    console.log(`Welcome to site ${username}`);
+
+      const salaries = [3000, 2500, 4000, 5000, 2100, 7800, 3700];
+      //    console.log([...salaries].sort())
+      //     console.log(salaries);
+      const tempSalaries = [...salaries];
+      const sortedSalaries = [];
+      while(tempSalaries.length) {
+        const minSalary = Math.min(...tempSalaries);
+        const index = tempSalaries.indexOf(minSalary);
+        tempSalaries.splice(index, 1);
+        sortedSalaries.push(minSalary);
+      }
+      console.log(sortedSalaries);
+    </script>
+  </body>
+</html>
