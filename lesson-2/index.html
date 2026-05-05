@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        const salaryBruto = [ 3500, 2000, 4000, 4000, 7000, 6500];
+
+        const calcNettoSalary = salary => {
+            let netto = 100;
+            netto += (salary - 100) * 0.3;
+            return netto;
+        };
+
+        const salaryNetto = salaryBruto.map(calcNettoSalary);
+
+        /*
+        Что мы должны в результате?
+        1. Массив:
+            В итоговом массиве число элементов должно быть ровно таким же, как в исходном, или нет?
+                - если такое же - используй map;
+                - если нет (массив будет меньше) - используй filter;
+        2. Не массив (число, объект и т.д.)
+            Результатом будет одно из значений массива или какой-то  общий вывод по массиву?
+                - если одно из значений массива - используй find;
+                - если общий вывод по массиву - используй reduce;
+        */
+
+        const salaries = [ 3500, 2000, 4000, 4000, 7000, 6500];
+        // O(1)
+        const getLastElement = (arr)=> arr[arr.length - 1];
+        // console.log(getLastElement(salaries));
+
+        // O(log n)
+        const countSteps = (n)=> {
+            let step = 0;
+            while(n > 1) {
+                n = Math.floor(n / 2);
+                step += 1;
+            }
+            return step;
+        }
+
+        // console.log(countSteps(4)); // 2
+        // console.log(countSteps(16)); // 4
+
+        //O(n)
+        const findMaxElement = arr => {
+            let maxElement = arr[0];
+            for(let i = 1; i < arr.length; i += 1) {
+                if(maxElement < arr[i]) {
+                    maxElement = arr[i]
+                }
+            }
+            return maxElement;
+        }
+        // console.log(findMaxElement(salaries));
+        
+        // O(n^2)
+        const getDublicates = arr => {
+            const dublicates = [];
+            for(let i = 0; i < arr.length; i+= 1) {
+                const element = arr[i];
+                for(let j = i + 1; j < arr.length; j += 1) {
+                    if(element === arr[j]) {
+                        dublicates.push(element);
+                        break;
+                    }
+                }
+            }
+            return dublicates;
+        }
+        console.log(getDublicates(salaries))
+
+        // O(n!)
+        // 3 точки - 3! = 1* 2 * 3 = 6
+        // 4 точки 4! = 1 * 2 * 3 * 4 = 24
+    </script>
+</body>
+</html>

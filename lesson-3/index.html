@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+
+      const sumToNum = n => {
+        if(n === 1) return 1;
+        const result = n + sumToNum(n - 1);
+        return result;
+        // if(n === 1) return 1;
+        // let sum = 0;
+        // for(let i = 1; i <= n; i += 1) {
+        //   sum += i;
+        // }
+        // return sum;
+      }
+      // console.log(sumToNum(5));
+      /*
+      1 + 2 + 3 + 4 + 5
+      sumToNum(5)
+      5 + sumToNum(4)
+      4 + sumToNum(3)
+      3 + sumToNum(2)
+      2 + sumToNum(1) - 1
+      */
+      
+      const logObjKeyValue = (obj, space = '') => {
+        for(const [key, value] of Object.entries(obj)) {
+          if(typeof value === "object" && value !== null) {
+            logObjKeyValue(value, space + ' ');
+            continue;
+          }
+          console.log(`${space}${key}: ${value}`);
+        }
+        // for(const key in obj) {
+        //   const value = obj[key];
+        //   console.log(`${key}: ${value}`);
+        // }
+      }
+
+      const user = {
+        name: "Alex",
+        age: null,
+        // getAddress() {
+
+        // },
+        address: {
+          city: "Berlin",
+          zip: 10115,
+          coords: {
+            lat: 52.52,
+            lng: 13.405,
+          },
+        },
+      };
+      // console.log(Object.entries(user))
+
+      // logObjKeyValue(user);
+      const newUser = structuredClone(user);
+      const newUser2 = JSON.parse(JSON.stringify(user));
+      console.log(newUser2);
+    </script>
+  </body>
+</html>
