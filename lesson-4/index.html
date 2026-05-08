@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const arr = [8, 3, 1, 5, 9, 2];
+
+      const findMinValueIndex = (arr) => {
+        let index = 0;
+        for (let i = 1; i < arr.length; i += 1) {
+          if (arr[i] < arr[index]) {
+            index = i;
+          }
+        }
+        return index;
+      };
+
+      const sortArr = (arr) => {
+        const copy = [...arr];
+        const result = [];
+        let iteration = 0;
+        while (copy.length) {
+          iteration += copy.length - 1;
+          const minValueIndex = findMinValueIndex(copy);
+          const [minValue] = copy.splice(minValueIndex, 1);
+          result.push(minValue);
+        }
+        console.log(iteration);
+        return result;
+      };
+
+      // console.log(sortArr(arr));
+
+      let iterations = 0;
+      // [8, 3, 1, 5, 9, 2];
+      const quickSort = arr => {
+        if(arr.length <= 1) return arr;
+
+        const pivotIndex = Math.floor(arr.length / 2); // index = 3
+        const pivot = arr[pivotIndex]; // 5
+        const left = [];
+        const right = [];
+        const equal = [];
+
+        iterations += arr.length - 1;
+        
+        for(const value of arr) {
+          if(value < pivot) {
+            left.push(value); // [3, 1, 2]
+          }
+          else if(value > pivot) {
+            right.push(value); // [8, 9]
+          }
+          else {
+            equal.push(value); // 5
+          }
+        }
+
+        return [...quickSort(left), ...equal, ...quickSort(right)]; // [3, 1, 2, 5, 8, 9]
+      }
+
+      console.log(quickSort(arr));
+      console.log("iterations", iterations);
+    </script>
+  </body>
+</html>
