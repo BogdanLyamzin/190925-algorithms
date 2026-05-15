@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const partition = (arr, low, high) => {
+        const pivot = arr[high]; // 3
+
+        let i = low - 1; // -1
+        for (let j = low; j < high; j += 1) {
+          // j = 1
+          if (arr[j] <= pivot) {
+            i += 1; // 0
+            const temp = arr[i]; // temp = arr[0] = 7
+            arr[i] = arr[j]; // arr[0] = 2;
+            arr[j] = temp; // arr[1] = 7;
+            // [2, 7, 9, 4, 3]
+          }
+        }
+        //[2, 7, 9, 4, 3]
+        const temp = arr[i + 1]; // temp = arr[0 + 1] = 7
+        arr[i + 1] = arr[high]; // arr[0 + 1] = arr[4] = 3;
+        // [2, 3, 9, 4, 3]
+        arr[high] = temp; // arr[4] = 7;
+        // [2, 3, 9, 4, 7]
+        return i + 1;
+      };
+
+      const quickSort = (arr, low = 0, high = arr.length - 1) => {
+        if (low < high) {
+          const idx = partition(arr, low, high); // 1
+          quickSort(arr, low, idx - 1); // arr, 0, 0
+          quickSort(arr, idx + 1, high); // arr, 2, 4 [9, 4, 7]
+        }
+        return arr;
+      };
+
+      const numbers = [7, 2, 9, 4, 3];
+      quickSort(numbers, 0, numbers.length - 1);
+      console.log(numbers);
+
+      /*
+      Средняя сложность быстрой сортировки: O(n log n)
+      Средняя сложность сортировки слиянием: O(n log n)
+      Худшая сложность быстрой сортировки: O(n^2) - если попался неудачный опорный элемент
+      Худшая сложность сортировки слиянием: O(n log n)
+      Объем выделяемой памяти для быстрой сортировки: O(log n)
+      Объем выделяемой памяти для сортировки слиянием: O(n)
+      */
+
+      const data = {
+        name: "Ivan",
+        info: {
+          age: 16,
+          school: {
+            number: 42,
+            city: "Kyiv",
+          },
+        },
+        status: "student",
+      };
+
+      const findValueByKey = (obj, key) => {
+        // 1. Проверяем, есть ли нужный ключ в текущем объекте
+        if (targetKey in data) {
+          return data[targetKey];
+        }
+
+        // 2. Перебираем все значения текущего объекта
+        for (const key in data) {
+          const value = data[key];
+
+          // 3. Если значение — это вложенный объект, ищем внутри него
+          if (
+            typeof value === "object" &&
+            value !== null &&
+            !Array.isArray(value)
+          ) {
+            const result = findValue(value, targetKey);
+
+            // 4. Если нашли — возвращаем результат
+            if (result !== undefined) {
+              return result;
+            }
+          }
+        }
+
+        // 5. Если нигде не нашли
+        return undefined;
+      };
+
+      console.log(findValueByKey(obj, "city")); // Kyiv
+      console.log(findValueByKey(obj, "age")); // 42
+      console.log(findValueByKey(obj, "country")); // undefined
+    </script>
+  </body>
+</html>
